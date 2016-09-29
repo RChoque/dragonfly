@@ -1,0 +1,7 @@
+services:
+    repository.project:
+        class: Dragonfly\CommonBundle\Entity\Repository\ProjectRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Dragonfly\CommonBundle\Entity\Project

@@ -1,0 +1,3 @@
+dragonfly_bug_tracker_bug_list:
+    path:     /{project}/bugs
+    defaults: { _controller: DragonflyBugTrackerBundle:Bug:index }

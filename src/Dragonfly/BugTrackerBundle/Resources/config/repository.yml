@@ -1,0 +1,7 @@
+services:
+    repository.bug:
+        class: Dragonfly\BugTrackerBundle\Entity\Repository\BugRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - Dragonfly\BugTrackerBundle\Entity\Bug

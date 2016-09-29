@@ -1,0 +1,55 @@
+dragonfly_common_dashboard:
+    path:     /
+    defaults: { _controller: DragonflyCommonBundle:Dashboard:index }
+
+dragonfly_common_project_new:
+    path:     /project/new
+    defaults: { _controller: DragonflyCommonBundle:Project:create }
+
+dragonfly_common_project_list:
+    path:     /project
+    defaults: { _controller: DragonflyCommonBundle:Project:index }
+
+dragonfly_common_project_show:
+    path:     /project/show/{id}
+    defaults: { _controller: DragonflyCommonBundle:Project:show }
+    requirements:
+        id: \d+
+
+dragonfly_common_project_update:
+    path:     /project/edit/{id}
+    defaults: { _controller: DragonflyCommonBundle:Project:update }
+    requirements:
+        id: \d+
+
+dragonfly_common_project_delete:
+    path:     /project/delete/{id}
+    defaults: { _controller: DragonflyCommonBundle:Project:delete }
+    requirements:
+        id: \d+
+
+dragonfly_common_workflow_new:
+    path:     /workflow/new
+    defaults: { _controller: DragonflyCommonBundle:Workflow:create }
+
+dragonfly_common_workflow_list:
+    path:     /workflow
+    defaults: { _controller: DragonflyCommonBundle:Workflow:index }
+
+dragonfly_common_workflow_show:
+    path:     /workflow/show/{id}
+    defaults: { _controller: DragonflyCommonBundle:Workflow:show }
+    requirements:
+        id: \d+
+
+dragonfly_common_workflow_update:
+    path:     /workflow/edit/{id}
+    defaults: { _controller: DragonflyCommonBundle:Workflow:update }
+    requirements:
+        id: \d+
+
+dragonfly_common_workflow_delete:
+    path:     /workflow/delete/{id}
+    defaults: { _controller: DragonflyCommonBundle:Workflow:delete }
+    requirements:
+        id: \d+

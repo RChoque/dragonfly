@@ -1,0 +1,38 @@
+{% extends "DragonflyCommonBundle::page.html.twig" %}
+
+{% set title = "Liste des projets" %}
+
+{% block page_title %}{{ parent() }} - {{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ title }}</h1>
+
+        <a href="{{ path("dragonfly_common_project_new") }}">
+            <button type="button" class="btn btn-primary btn-lg pull-right">
+                <i class="fa fa-plus"></i> {{ "form.label.add"|trans }}
+            </button>
+        </a>
+
+
+        <table class="table table-bordered table-striped table-hover table-condensed">
+        <tr>
+            <th>Intitulé</th>
+            <th></th>
+        </tr>
+        {% for project in projects %}
+        <tr>
+            <td>{{ project.name }}</td>
+            <td>
+                <a class="btn btn-primary btn-xs" href="{{ path("dragonfly_common_project_show", {id: project.id}) }}" title="{{ "admin.list.edit"|trans }}"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-warning btn-xs" href="{{ path("dragonfly_common_project_update", {id: project.id}) }}" title="{{ "admin.list.edit"|trans }}"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-danger btn-xs" href="{{ path("dragonfly_common_project_delete", {id: project.id})  }}" title="{{ "admin.list.delete"|trans }}"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+        </table>
+        <div class="navigation pull-right">
+            {{ knp_pagination_render(projects) }}
+        </div>
+    </div>
+{% endblock %}

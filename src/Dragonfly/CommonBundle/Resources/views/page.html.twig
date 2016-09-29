@@ -1,0 +1,60 @@
+{% extends 'DragonflyCommonBundle::base.html.twig' %}
+
+{% block page_title %}Espace Administration{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <header class="clearfix">
+        <nav class="navbar navbar-default">
+        {{ knp_menu_render('DragonflyCommonBundle:Builder:mainMenu', {'currentClass': 'active', 'template': 'DragonflyCommonBundle:Menu:knp_menu.html.twig'}) }}
+        </nav>
+    </header>    
+    
+    <div id="pagecontent" class="clearfix">
+
+        {% set successes = app.session.flashbag.get('success') %}
+        {% set notices = app.session.flashbag.get('notice') %}
+        {% set warnings = app.session.flashbag.get('warning') %}
+        {% set errors = app.session.flashbag.get('error') %}
+
+        <div class="container">
+        {% if successes is not empty %}
+            <div class="alert alert-dismissible alert-success" role="alert">
+                {% for flashMessage in successes %} 
+                    {{ flashMessage }} 
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if notices is not empty %}
+            <div class="alert alert-dismissible alert-info" role="alert">
+                {% for flashMessage in notices %} 
+                    {{ flashMessage }} 
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if warnings is not empty %}
+            <div class="alert alert-dismissible alert-warning" role="alert">
+                {% for flashMessage in warnings %} 
+                    {{ flashMessage }} 
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if errors is not empty %}
+            <div class="alert alert-dismissible alert-danger" role="alert">
+                {% for flashMessage in errors %} 
+                    {{ flashMessage }} 
+                {% endfor %}
+            </div>
+        {% endif %}
+        </div>
+        
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        
+    </footer>
+{% endblock %}

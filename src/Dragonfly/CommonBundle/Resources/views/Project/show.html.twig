@@ -1,0 +1,24 @@
+{% extends "DragonflyCommonBundle::page.html.twig" %}
+
+{% block page_title %}{{ parent() }} - Projet {{ project.name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% if delete_form is defined %}
+                {% if type.removable %}
+                    {% include "MazediaCareerBundle:Admin/Commun:delete.html.twig" with {'url': path('mazedia_career_admin_job_type_delete', {id: type.id}), question: "Êtes-vous sûr de vouloir supprimer ce type de poste ?"} %}
+                {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        Suppression impossible : Il y a {{ type.jobs|length }} annonces associée à ce type de poste.
+                    </div>
+                {% endif %}
+        {% endif %}
+
+        <h1>{{ project.name }}</h1>
+
+
+    </div>
+
+    
+
+{% endblock %}

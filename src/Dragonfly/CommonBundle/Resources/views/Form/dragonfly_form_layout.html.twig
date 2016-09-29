@@ -1,0 +1,63 @@
+{% use "DragonflyCommonBundle:Form:bootstrap_3_horizontal_layout.html.twig" %}
+
+{%- block form_widget_compound -%}
+    {% if form.parent.vars.prototype is defined %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+    {% endif %}
+    <div {{ block('widget_container_attributes') }}>
+        {%- if form.parent is empty -%}
+            {{ form_errors(form) }}
+        {%- endif -%}
+        {{- block('form_rows') -}}
+        {{- form_rest(form) -}}
+    </div>
+    {% if form.parent.vars.prototype is defined %}
+             <button class="pull-right delete-item" ><i class="fa fa-trash"></i></button>
+            </div>
+        </div>
+    {% endif %}
+    {% if form.vars.prototype is defined %}
+        <button class="copy-prototype" ><i class="fa fa-plus"></i></button>
+        <script type="text/javascript">
+            $(document).on('click','button.delete-item', function(){
+                $(this).parentsUntil('#{{ form.vars.id }}').remove();
+                return false;
+            });
+
+            $(document).on('click','button.copy-prototype', function(){
+                var prototype = $('#{{ form.vars.id }}').data('prototype');
+                var num = $('#{{ form.vars.id }}').children(".form-group").last().find("[id^='{{ form.vars.id }}']").attr('id').replace("{{ form.vars.id }}_", ""); 
+                var regex = new RegExp('__name__', 'g');
+                $('#{{ form.vars.id }}').append(prototype.replace(regex,parseInt(num)+1));
+                return false;
+            });
+        </script>
+    {% endif %}
+{%- endblock form_widget_compound -%}
+
+{%- block collection_widget -%}
+    {% if prototype is defined %}
+        {%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}
+    {% endif %}
+    {{- block('form_widget') -}}    
+{%- endblock collection_widget -%}
+
+{% block form_row -%}
+    {% spaceless %}
+        <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+            {% if form.vars.label is not sameas(false) or form.vars.compound is sameas(false) %}
+                {{ form_label(form) }}
+            {% endif %}                    
+            <div class="{{ block('form_group_class') }}">
+                {{ form_widget(form) }}
+                {{ form_errors(form) }}
+            </div>
+        </div>
+    {% endspaceless %}
+{%- endblock form_row %}
+
+{% block submit_row -%}
+    {%- set type = type|default('submit') -%}
+    {{ block('button_widget') }}
+{%- endblock submit_row %}
